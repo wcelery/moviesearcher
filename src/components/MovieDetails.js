@@ -26,7 +26,9 @@ export default function MovieDetails(props) {
         alt=""
         width="342px"
       />
-      <h1>{details.title}</h1>
+      <div className="text">
+        <h1 className="title">{details.title}</h1>
+      </div>
     </div>
   );
 }
