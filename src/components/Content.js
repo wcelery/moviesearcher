@@ -16,6 +16,7 @@ export default function Content() {
   React.useEffect(() => {
     fetchMovies();
   }, []);
+  console.log(movies);
 
   return (
     <div className="content">

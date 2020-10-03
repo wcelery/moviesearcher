@@ -2,6 +2,7 @@ import React from "react";
 
 export default function MovieDetails(props) {
   const [details, setDetails] = React.useState({});
+  const [genres, setGenres] = React.useState([]);
 
   const API_KEY = "3898867ebc97917c67c0d9841df34dce";
 
@@ -15,9 +16,15 @@ export default function MovieDetails(props) {
 
   React.useEffect(() => {
     fetchMovieDetail();
+    /* fetchGenres(); */
   }, []);
 
-  console.log(details);
+  const fetchGenres = () => {
+    const test = details.genres.map();
+    setGenres(test);
+  };
+
+  console.log(details.genres);
 
   return (
     <div className="details">
@@ -28,6 +35,32 @@ export default function MovieDetails(props) {
       />
       <div className="text">
         <h1 className="title">{details.title}</h1>
+        <p className="overview">{details.overview}</p>
+        <section className="info">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="row">Release</th>
+                <td>{details.release_date}</td>
+              </tr>
+              <tr>
+                <th scope="row">Average rating</th>
+                <td>
+                  {details.vote_average} (based on {details.vote_count} votes)
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Budget</th>
+                <td>{details.budget} $</td>
+              </tr>
+              <tr>
+                <th scope="row">Tagline</th>
+                <td>{details.tagline || "No tagline presented"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section className="tags"></section>
       </div>
     </div>
   );
