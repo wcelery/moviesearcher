@@ -50,20 +50,25 @@
   grid-gap: 48px;
 }
 
-.details {
-  display: flex;
-  justify-content: left;
+.wrapper {
   padding: 0px 80px 50px 80px;
 }
 
+.details {
+  display: flex;
+  justify-content: left;
+}
+
 .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   left: auto;
   margin-left: 80px;
 }
 
 .title {
   margin-block-start: 0em;
-  margin-block-end: 50px;
   vertical-align: top;
   font-size: 60px;
   font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
@@ -72,14 +77,32 @@
 
 .overview {
   margin-block-start: 0em;
-  margin-block-end: 50px;
 }
 
 th {
   text-align: left;
-  padding: 0px 25px 30px 0px;
+  padding: 0px 25px 15px 0px;
 }
 
 td {
   vertical-align: baseline;
+}
+
+img {
+  box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.397);
+}
+
+.similar {
+  display: flex;
+}
+
+.img-similar {
+  margin-right: 48px;
+}
+
+.similar-title {
+  margin-block-start: 50px;
+  margin-block-end: 50px;
+  font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
+  font-size: 64px;
 }
