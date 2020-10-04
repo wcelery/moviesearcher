@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function MovieDetails(props) {
   const [details, setDetails] = React.useState({});
@@ -16,15 +17,18 @@ export default function MovieDetails(props) {
 
   React.useEffect(() => {
     fetchMovieDetail();
-    /* fetchGenres(); */
   }, []);
 
-  const fetchGenres = () => {
-    const test = details.genres.map();
-    setGenres(test);
-  };
+  React.useEffect(() => {
+    fetchGenres();
+  }, [details]);
 
-  console.log(details.genres);
+  const fetchGenres = () => {
+    if (details.genres) {
+      const test = details.genres.map((genre) => genre.name);
+      setGenres(test);
+    }
+  };
 
   return (
     <div className="details">
@@ -60,7 +64,12 @@ export default function MovieDetails(props) {
             </tbody>
           </table>
         </section>
-        <section className="tags"></section>
+        <button className="add-to-fav">Add to favorites</button>
+        <section className="tags">
+          {genres.map((genre) => (
+            <button key={uuidv4()}>{genre}</button>
+          ))}
+        </section>
       </div>
     </div>
   );
