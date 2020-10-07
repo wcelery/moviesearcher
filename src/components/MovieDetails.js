@@ -70,7 +70,9 @@ export default function MovieDetails(props) {
           </section>
           <section className="tags">
             {genres.map((genre) => (
-              <button key={uuidv4()}>{genre}</button>
+              <button key={uuidv4()} className="genre">
+                {genre}
+              </button>
             ))}
           </section>
           <button className="add-to-fav">Add to favorites</button>

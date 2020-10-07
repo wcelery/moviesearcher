@@ -22,6 +22,7 @@
 
 .App {
   font-family: "Helvetica Neue Cyr Roman", Liberation Sans, Arial, sans-serif;
+  background-color: #eee;
 }
 
 .nav {
@@ -107,4 +108,70 @@ img {
   margin-block-end: 50px;
   font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
   font-size: 64px;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.genre {
+  padding: 5px 25px 5px 25px;
+  margin: 0px 25px 10px 0px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  background-color: #eee;
+  font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
+  font-size: 18px;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.genre:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  -webkit-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.add-to-fav {
+  cursor: pointer;
+  font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
+  font-size: 20px;
+  height: 64px;
+  width: 300px;
+  border-radius: 4px;
+  border: 2px solid #f54c4c;
+  position: relative;
+  transition: 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+  -o-transition: 0.08s ease-in;
+  -ms-transition: 0.08s ease-in;
+  -moz-transition: 0.08s ease-in;
+  -webkit-transition: 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 1;
+  outline: 0;
+  color: #f54c4c;
+}
+
+.add-to-fav:hover {
+  color: whitesmoke;
+}
+
+.add-to-fav:before {
+  content: "";
+  position: absolute;
+  background: #f54c4c;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: -1;
+  transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  -webkit-transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.add-to-fav:hover:before {
+  top: 0;
 }
