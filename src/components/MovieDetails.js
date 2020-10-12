@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import Similar from "./Similar";
+import Movie from "./Movie";
 import { useLocation } from "react-router-dom";
 
 export default function MovieDetails(props) {
@@ -21,11 +21,10 @@ export default function MovieDetails(props) {
     const genresId = await details.genres.map((genre) => genre.id).toString();
     setDetails(details);
     setGenres(genres);
-    const test = await fetch(
+    const dataSimilars = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genresId}&include_adult=false&include_video=false&page=1`
     );
-    const similar = await test.json();
-    similar.results.length = 5;
+    const similar = await dataSimilars.json();
     setSimilars(similar.results);
   };
 
@@ -42,7 +41,7 @@ export default function MovieDetails(props) {
           width="342px"
         />
         <div className="text">
-          <h1 className="title">{details.title}</h1>
+          <h1 className="movie-title">{details.title}</h1>
           <p className="overview">{details.overview}</p>
           <section className="info">
             <table>
@@ -81,7 +80,7 @@ export default function MovieDetails(props) {
       <h1 className="similar-title">You may also like</h1>
       <div className="similar">
         {similars.map((similar) => (
-          <Similar
+          <Movie
             key={uuidv4()}
             poster={similar.poster_path}
             title={similar.title}
