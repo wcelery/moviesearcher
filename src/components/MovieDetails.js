@@ -25,6 +25,7 @@ export default function MovieDetails(props) {
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genresId}&include_adult=false&include_video=false&page=1`
     );
     const similar = await dataSimilars.json();
+    similar.results.length = 14; //14 similar movie cards looks nice
     setSimilars(similar.results);
   };
 
