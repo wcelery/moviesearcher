@@ -20,9 +20,12 @@
   font-style: normal;
 }
 
+body {
+  background-color: #eee;
+}
+
 .App {
   font-family: "Helvetica Neue Cyr Roman", Liberation Sans, Arial, sans-serif;
-  background-color: #eee;
 }
 
 .nav {

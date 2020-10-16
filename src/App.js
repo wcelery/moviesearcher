@@ -23,7 +23,6 @@ function App() {
   React.useEffect(() => {
     fetchSearch();
   }, [query]);
-  console.log(searchContent);
 
   return (
     <Router>

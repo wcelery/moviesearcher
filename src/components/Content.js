@@ -1,21 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies } from "../redux/actions";
 import Movie from "./Movie";
+import { Loader } from "./Loader";
 
 export default function Content() {
-  const [movies, setMovies] = React.useState([]);
-
-  const API_KEY = "3898867ebc97917c67c0d9841df34dce";
-
-  const fetchMovies = async () => {
-    const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
-`);
-    const movies = await data.json();
-    setMovies(movies.results);
-  };
+  const dispatch = useDispatch();
+  //pulling things from store like that:
+  const movies = useSelector((state) => state.movies.fetchedMovies);
+  const loading = useSelector((state) => state.app.loading);
 
   React.useEffect(() => {
-    fetchMovies();
+    dispatch(fetchMovies());
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  console.log(alert);
 
   return (
     <div className="content">
