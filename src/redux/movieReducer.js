@@ -1,7 +1,8 @@
-import { FETCH_MOVIES } from "./config";
+import { FETCH_MOVIES, FETCH_MOVIE_DETAILS } from "./config";
 
 const initialState = {
   fetchedMovies: [],
+  fetchedDetails: {},
 };
 
 export const movieReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedMovies: action.payload,
+      };
+    case FETCH_MOVIE_DETAILS:
+      return {
+        ...state,
+        fetchedDetails: action.payload,
       };
     default:
       return state;

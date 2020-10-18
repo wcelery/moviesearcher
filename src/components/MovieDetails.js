@@ -1,12 +1,15 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import Movie from "./Movie";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovieDetails } from "../redux/actions";
+import Movie from "./Movie";
+import { Loader } from "./Loader";
 
 export default function MovieDetails(props) {
-  const [details, setDetails] = React.useState({});
   const [genres, setGenres] = React.useState([]);
   const [similars, setSimilars] = React.useState([]);
+  const dispatch = useDispatch();
 
   let location = useLocation();
 
@@ -19,7 +22,6 @@ export default function MovieDetails(props) {
     const details = await data.json();
     const genres = await details.genres.map((genre) => genre.name);
     const genresId = await details.genres.map((genre) => genre.id).toString();
-    setDetails(details);
     setGenres(genres);
     const dataSimilars = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genresId}&include_adult=false&include_video=false&page=1`
@@ -31,7 +33,17 @@ export default function MovieDetails(props) {
 
   React.useEffect(() => {
     fetchMovieDetail();
+    dispatch(fetchMovieDetails(props.match.params.id));
   }, [location]); //rerender component if URL was changed
+
+  const details = useSelector((state) => state.movies.fetchedDetails);
+  const loading = useSelector((state) => state.app.loading);
+  const genres1 = useSelector((state) => state.movies.fetchedDetails.genres);
+  console.log(genres1);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="wrapper">
