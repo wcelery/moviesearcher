@@ -7,39 +7,19 @@ import Movie from "./Movie";
 import { Loader } from "./Loader";
 
 export default function MovieDetails(props) {
-  const [genres, setGenres] = React.useState([]);
-  const [similars, setSimilars] = React.useState([]);
   const dispatch = useDispatch();
 
   let location = useLocation();
 
-  const API_KEY = "3898867ebc97917c67c0d9841df34dce";
-
-  const fetchMovieDetail = async () => {
-    const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${props.match.params.id}?api_key=${API_KEY}`
-    );
-    const details = await data.json();
-    const genres = await details.genres.map((genre) => genre.name);
-    const genresId = await details.genres.map((genre) => genre.id).toString();
-    setGenres(genres);
-    const dataSimilars = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${genresId}&include_adult=false&include_video=false&page=1`
-    );
-    const similar = await dataSimilars.json();
-    similar.results.length = 14; //14 similar movie cards looks nice
-    setSimilars(similar.results);
-  };
-
   React.useEffect(() => {
-    fetchMovieDetail();
     dispatch(fetchMovieDetails(props.match.params.id));
   }, [location]); //rerender component if URL was changed
 
   const details = useSelector((state) => state.movies.fetchedDetails);
   const loading = useSelector((state) => state.app.loading);
-  const genres1 = useSelector((state) => state.movies.fetchedDetails.genres);
-  console.log(genres1);
+  const genres = useSelector((state) => state.movies.fetchedGenres);
+  const genreNames = genres.map((genre) => genre.name);
+  const similars = useSelector((state) => state.movies.fetchedSimilars);
 
   if (loading) {
     return <Loader />;
@@ -81,7 +61,7 @@ export default function MovieDetails(props) {
             </table>
           </section>
           <section className="tags">
-            {genres.map((genre) => (
+            {genreNames.map((genre) => (
               <button key={uuidv4()} className="genre">
                 {genre}
               </button>
