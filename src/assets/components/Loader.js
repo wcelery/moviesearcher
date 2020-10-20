@@ -1,7 +1,7 @@
 import React from "react";
-import "../assets/Loader.css";
+import "./Loader.css";
 
-export const Loader = () => {
+export function Loader() {
   return (
     <div className="lds-ellipsis">
       <div></div>
@@ -10,4 +10,4 @@ export const Loader = () => {
       <div></div>
     </div>
   );
-};
+}

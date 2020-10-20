@@ -1,24 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../redux/actions";
+import { useSelector } from "react-redux";
 import Movie from "./Movie";
-import { Loader } from "./Loader";
+import { Loader } from "../assets/components/Loader";
+import NotFound from "../assets/components/NotFound";
+import EmptyQuery from "../assets/components/EmptyQuery";
 
 export default function Content() {
-  const dispatch = useDispatch();
   //pulling things from store like that:
   const movies = useSelector((state) => state.movies.fetchedMovies);
   const loading = useSelector((state) => state.app.loading);
-
-  React.useEffect(() => {
-    dispatch(fetchMovies());
-  }, []);
 
   if (loading) {
     return <Loader />;
   }
 
-  console.log(alert);
+  if (!movies) {
+    return <EmptyQuery />;
+  } else if (movies.length === 0) {
+    return <NotFound />;
+  }
 
   return (
     <div className="content">

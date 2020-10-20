@@ -5,8 +5,8 @@ import {
   REQUEST_MOVIE_DETAILS,
 } from "./config";
 
-export const fetchMovies = () => {
-  return { type: REQUEST_MOVIES };
+export const fetchMovies = (query) => {
+  return { type: REQUEST_MOVIES, query };
 };
 
 export const fetchMovieDetails = (id) => {

@@ -1,21 +1,21 @@
 @font-face {
   font-family: "Helvetica Neue Cyr Roman";
-  src: url("./assets/HelveticaNeueCyr-Roman.eot");
-  src: url("./assets/HelveticaNeueCyr-Roman.eot?#iefix")
+  src: url("./assets/fonts/HelveticaNeueCyr-Roman.eot");
+  src: url("./assets/fonts/HelveticaNeueCyr-Roman.eot?#iefix")
       format("embedded-opentype"),
-    url("./assets/HelveticaNeueCyr-Roman.woff") format("woff"),
-    url("./assets/HelveticaNeueCyr-Roman.ttf") format("truetype");
+    url("./assets/fonts/HelveticaNeueCyr-Roman.woff") format("woff"),
+    url("./assets/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Helvetica Neue Cyr Medium";
-  src: url("./assets/HelveticaNeueCyr-Medium.eot");
-  src: url("./assets/HelveticaNeueCyr-Medium.eot?#iefix")
+  src: url("./assets/fonts/HelveticaNeueCyr-Medium.eot");
+  src: url("./assets/fonts/HelveticaNeueCyr-Medium.eot?#iefix")
       format("embedded-opentype"),
-    url("./assets/HelveticaNeueCyr-Medium.woff") format("woff"),
-    url("./assets/HelveticaNeueCyr-Medium.ttf") format("truetype");
+    url("./assets/fonts/HelveticaNeueCyr-Medium.woff") format("woff"),
+    url("./assets/fonts/HelveticaNeueCyr-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +26,10 @@ body {
 
 .App {
   font-family: "Helvetica Neue Cyr Roman", Liberation Sans, Arial, sans-serif;
+}
+
+.index {
+  padding: 0px 80px 50px 80px;
 }
 
 .nav {
@@ -49,7 +53,6 @@ body {
 }
 
 .content {
-  padding: 0px 80px 50px 80px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 48px;

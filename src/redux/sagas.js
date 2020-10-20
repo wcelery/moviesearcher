@@ -16,12 +16,17 @@ export function* sagaWatcher() {
   yield takeEvery(REQUEST_MOVIE_DETAILS, fetchMovieDetailsWorker);
 }
 
-function* fetchMoviesWorker() {
+function* fetchMoviesWorker({ query = "" }) {
   try {
     /* put is analog of dispatch in saga */
     yield put(showLoader());
     /* payload is equal to result of fetchMovies */
-    const payload = yield call(fetchMovies);
+    let url =
+      query === ""
+        ? `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
+    `
+        : `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+    const payload = yield call(fetchMovies, url);
     yield put({ type: FETCH_MOVIES, payload });
     yield put(hideLoader());
   } catch (e) {
@@ -44,9 +49,8 @@ function* fetchMovieDetailsWorker({ id }) {
   }
 }
 
-async function fetchMovies() {
-  const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
-`);
+async function fetchMovies(url) {
+  const data = await fetch(url);
   const movies = await data.json();
   return await movies.results;
 }
