@@ -10,6 +10,7 @@ const initialState = {
   fetchedDetails: {},
   fetchedGenres: [],
   fetchedSimilars: [],
+  page: 1,
 };
 
 export const movieReducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ export const movieReducer = (state = initialState, action) => {
     case FETCH_MOVIES:
       return {
         ...state,
-        fetchedMovies: action.payload,
+        fetchedMovies: action.results,
+        page: action.page,
       };
     case FETCH_MOVIE_DETAILS:
       return {

@@ -27,7 +27,12 @@ function* fetchMoviesWorker({ query = "" }) {
     `
         : `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
     const payload = yield call(fetchMovies, url);
-    yield put({ type: FETCH_MOVIES, payload });
+    console.log(payload);
+    yield put({
+      type: FETCH_MOVIES,
+      results: payload.results,
+      page: payload.page,
+    });
     yield put(hideLoader());
   } catch (e) {
     console.log(e);
@@ -52,7 +57,7 @@ function* fetchMovieDetailsWorker({ id }) {
 async function fetchMovies(url) {
   const data = await fetch(url);
   const movies = await data.json();
-  return await movies.results;
+  return await movies;
 }
 
 async function fetchMovieDetails(id) {

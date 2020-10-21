@@ -26,6 +26,7 @@ body {
 
 .App {
   font-family: "Helvetica Neue Cyr Roman", Liberation Sans, Arial, sans-serif;
+  overflow: hidden;
 }
 
 .index {
@@ -56,6 +57,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 48px;
+  overflow: hidden;
 }
 
 .wrapper {
