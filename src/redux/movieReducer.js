@@ -2,6 +2,7 @@ import {
   FETCH_GENRES,
   FETCH_MOVIES,
   FETCH_MOVIE_DETAILS,
+  FETCH_SEARCH,
   FETCH_SIMILARS,
 } from "./config";
 
@@ -18,7 +19,7 @@ export const movieReducer = (state = initialState, action) => {
     case FETCH_MOVIES:
       return {
         ...state,
-        fetchedMovies: action.results,
+        fetchedMovies: [...state.fetchedMovies, ...action.results],
         page: action.page,
       };
     case FETCH_MOVIE_DETAILS:
@@ -35,6 +36,13 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedSimilars: action.payload,
+      };
+
+    case FETCH_SEARCH:
+      return {
+        ...state,
+        fetchedMovies: action.results,
+        page: action.page,
       };
     default:
       return state;

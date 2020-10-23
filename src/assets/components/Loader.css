@@ -5,6 +5,7 @@
   height: 80px;
   left: 50%;
   top: 50%;
+  clear: both;
 }
 .lds-ellipsis div {
   position: absolute;

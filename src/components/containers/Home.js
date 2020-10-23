@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchMovies } from "../../redux/actions";
 import Content from "../Content";
-import Search from "../SearchBar";
+import SearchBar from "../SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="index">
-      <Search />
+      <SearchBar />
       <Content />
     </div>
   );

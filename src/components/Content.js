@@ -6,7 +6,6 @@ import { Loader } from "../assets/components/Loader";
 import NotFound from "../assets/components/NotFound";
 import EmptyQuery from "../assets/components/EmptyQuery";
 import { fetchMovies } from "../redux/actions";
-import { REQUEST_MOVIES } from "../redux/config";
 
 export default function Content() {
   //pulling things from store like that:
@@ -15,8 +14,6 @@ export default function Content() {
   let page = useSelector((state) => state.movies.page);
 
   const dispatch = useDispatch();
-
-  console.log(page);
 
   if (loading) {
     return <Loader />;
@@ -29,12 +26,13 @@ export default function Content() {
   }
 
   const fetchMoreData = () => {
-    dispatch(fetchMovies(page));
+    dispatch(fetchMovies());
   };
 
   return (
     <InfiniteScroll
       pageStart={1}
+      initialLoad={false}
       loadMore={() => fetchMoreData()}
       hasMore={true}
       loader={<Loader />}
