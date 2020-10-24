@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchMovies } from "../redux/actions";
+import { fetchMovies, requestSearch } from "../redux/actions";
 import { DebounceInput } from "react-debounce-input";
 
 export default function SearchBar() {
@@ -22,7 +22,7 @@ export default function SearchBar() {
         <DebounceInput
           minLength={3}
           debounceTimeout={400}
-          onChange={(e) => dispatch(fetchMovies(e.target.value))}
+          onChange={(e) => dispatch(requestSearch(e.target.value))}
           className="search"
           placeholder="Search for ..."
         />

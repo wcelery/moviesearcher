@@ -3,6 +3,7 @@ import {
   SHOW_LOADER,
   HIDE_LOADER,
   REQUEST_MOVIE_DETAILS,
+  REQUEST_SEARCH,
 } from "./config";
 
 export const fetchMovies = (query) => {
@@ -20,3 +21,7 @@ export function showLoader() {
 export function hideLoader() {
   return { type: HIDE_LOADER };
 }
+
+export const requestSearch = (query) => {
+  return { type: REQUEST_SEARCH, payload: query };
+};

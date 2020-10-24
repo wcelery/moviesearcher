@@ -1,4 +1,4 @@
-import { HIDE_LOADER, SHOW_LOADER } from "./config";
+import { HIDE_LOADER, SHOW_LOADER } from "../config";
 
 const initialState = {
   loading: false,

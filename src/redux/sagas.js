@@ -14,7 +14,7 @@ import * as selector from "./selectors";
 
 export function* sagaWatcher() {
   /* catch every action that have type REQUEST_MOVIES and apply a function to it*/
-  yield takeEvery(REQUEST_MOVIES, fetchMoviesWorker);
+  yield takeEvery(REQUEST_MOVIES, fetchMoviesWorkertest);
   yield takeEvery(REQUEST_MOVIE_DETAILS, fetchMovieDetailsWorker);
 }
 
@@ -45,19 +45,19 @@ function* fetchMoviesWorker({ query = "" }) {
 function* fetchMoviesWorkertest({ query = "" }) {
   try {
     let url;
-    let page = yield select(selector.page);
+
     /* put is analog of dispatch in saga */
     if (query) {
-      yield put(showLoader());
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
+      let search_page = yield select(selector.search_page);
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${search_page}`;
       const payload = yield call(fetchMovies, url);
       yield put({
         type: FETCH_SEARCH,
         results: payload.results,
-        page: payload.page + 1,
+        search_page: payload.page + 1,
       });
-      yield put(hideLoader());
     } else {
+      let page = yield select(selector.page);
       url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}
     `;
       const payload = yield call(fetchMovies, url);

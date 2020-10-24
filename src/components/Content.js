@@ -11,7 +11,7 @@ export default function Content() {
   //pulling things from store like that:
   const movies = useSelector((state) => state.movies.fetchedMovies);
   const loading = useSelector((state) => state.app.loading);
-  let page = useSelector((state) => state.movies.page);
+  let query = useSelector((state) => state.search.query);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,11 @@ export default function Content() {
   }
 
   const fetchMoreData = () => {
-    dispatch(fetchMovies());
+    if (query) {
+      dispatch(fetchMovies(query));
+    } else {
+      dispatch(fetchMovies());
+    }
   };
 
   return (
