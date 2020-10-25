@@ -12,7 +12,6 @@ const initialState = {
   fetchedGenres: [],
   fetchedSimilars: [],
   page: 1,
-  search_page: 1,
 };
 
 export const movieReducer = (state = initialState, action) => {
@@ -37,13 +36,6 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedSimilars: action.payload,
-      };
-
-    case FETCH_SEARCH:
-      return {
-        ...state,
-        fetchedMovies: [...state.fetchedMovies, ...action.results],
-        search_page: action.search_page,
       };
     default:
       return state;

@@ -8,6 +8,7 @@ import {
   FETCH_GENRES,
   FETCH_SIMILARS,
   FETCH_SEARCH,
+  REQUEST_SEARCH,
 } from "./config";
 import { showLoader, hideLoader } from "./actions";
 import * as selector from "./selectors";
@@ -16,6 +17,7 @@ export function* sagaWatcher() {
   /* catch every action that have type REQUEST_MOVIES and apply a function to it*/
   yield takeEvery(REQUEST_MOVIES, fetchMoviesWorkertest);
   yield takeEvery(REQUEST_MOVIE_DETAILS, fetchMovieDetailsWorker);
+  yield takeEvery(REQUEST_SEARCH, fetchSearchWorker);
 }
 
 function* fetchMoviesWorker({ query = "" }) {
@@ -42,31 +44,33 @@ function* fetchMoviesWorker({ query = "" }) {
   }
 }
 
-function* fetchMoviesWorkertest({ query = "" }) {
+function* fetchMoviesWorkertest() {
   try {
-    let url;
-
-    /* put is analog of dispatch in saga */
-    if (query) {
-      let search_page = yield select(selector.search_page);
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${search_page}`;
-      const payload = yield call(fetchMovies, url);
-      yield put({
-        type: FETCH_SEARCH,
-        results: payload.results,
-        search_page: payload.page + 1,
-      });
-    } else {
-      let page = yield select(selector.page);
-      url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}
+    const page = yield select(selector.page);
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}
     `;
-      const payload = yield call(fetchMovies, url);
-      yield put({
-        type: FETCH_MOVIES,
-        results: payload.results,
-        page: payload.page + 1,
-      });
-    }
+    const payload = yield call(fetchMovies, url);
+    yield put({
+      type: FETCH_MOVIES,
+      results: payload.results,
+      page: payload.page + 1,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* fetchSearchWorker({ query = "" }) {
+  try {
+    const page = yield select(selector.search_page);
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
+    const payload = yield call(fetchMovies, url);
+    yield put({
+      type: FETCH_SEARCH,
+      query,
+      results: payload.results,
+      page: payload.page + 1,
+    });
   } catch (e) {
     console.log(e);
   }

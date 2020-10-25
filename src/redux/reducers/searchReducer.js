@@ -1,15 +1,25 @@
-import { REQUEST_SEARCH } from "../config";
+import { FETCH_SEARCH, REQUEST_SEARCH } from "../config";
 
 const initialState = {
   query: "",
+  fetchedSearch: [],
+  page: 1,
 };
 
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_SEARCH:
+    case FETCH_SEARCH:
       return {
-        state,
-        query: action.payload,
+        ...state,
+        fetchedSearch: [...state.fetchedSearch, ...action.results],
+        query: action.query,
+        page: action.page,
+      };
+    case "test":
+      return {
+        ...state,
+        fetchedSearch: [],
+        page: state.page + 1,
       };
     default:
       return state;

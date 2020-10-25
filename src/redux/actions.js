@@ -6,8 +6,8 @@ import {
   REQUEST_SEARCH,
 } from "./config";
 
-export const fetchMovies = (query) => {
-  return { type: REQUEST_MOVIES, query };
+export const requestMovies = () => {
+  return { type: REQUEST_MOVIES };
 };
 
 export const fetchMovieDetails = (id) => {
@@ -23,5 +23,5 @@ export function hideLoader() {
 }
 
 export const requestSearch = (query) => {
-  return { type: REQUEST_SEARCH, payload: query };
+  return { type: REQUEST_SEARCH, query };
 };
