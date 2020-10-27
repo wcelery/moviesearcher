@@ -1,8 +1,8 @@
 import {
+  CLEAR_BEST_MOVIES,
   FETCH_GENRES,
   FETCH_MOVIES,
   FETCH_MOVIE_DETAILS,
-  FETCH_SEARCH,
   FETCH_SIMILARS,
 } from "../config";
 
@@ -36,6 +36,12 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedSimilars: action.payload,
+      };
+    case CLEAR_BEST_MOVIES:
+      return {
+        ...state,
+        fetchedMovies: [],
+        page: 1,
       };
     default:
       return state;

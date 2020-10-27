@@ -8,7 +8,7 @@ import EmptyQuery from "../assets/components/EmptyQuery";
 import { requestMovies, requestSearch } from "../redux/actions";
 
 export default function Content() {
-  //pulling things from store like that:
+  //pulling things from state like that:
   const bestMovies = useSelector((state) => state.movies.fetchedMovies);
   const searchedMovies = useSelector((state) => state.search.fetchedSearch);
   let movies;
@@ -21,25 +21,22 @@ export default function Content() {
     return <Loader />;
   }
 
-  /*   if (!movies) {
-    return <EmptyQuery />;
-  } else if (movies.length === 0) {
-    return <NotFound />;
-  } */
-
-  if (!query) {
-    movies = bestMovies;
-  } else {
-    movies = searchedMovies;
-  }
+  query ? (movies = searchedMovies) : (movies = bestMovies);
 
   const fetchMoreData = () => {
+    const isScrolling = true;
     if (query) {
-      dispatch(requestSearch(query));
-    } else {
+      dispatch(requestSearch(query, isScrolling));
+    } else if (searchedMovies.length === 0) {
       dispatch(requestMovies());
     }
   };
+
+  if (!movies) {
+    return <EmptyQuery />;
+  } else if (movies.length === 0) {
+    return <NotFound />;
+  }
 
   return (
     <InfiniteScroll

@@ -1,4 +1,4 @@
-import { FETCH_SEARCH, REQUEST_SEARCH } from "../config";
+import { CLEAR_SEARCHED_MOVIES, FETCH_SEARCH } from "../config";
 
 const initialState = {
   query: "",
@@ -9,17 +9,27 @@ const initialState = {
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SEARCH:
-      return {
-        ...state,
-        fetchedSearch: [...state.fetchedSearch, ...action.results],
-        query: action.query,
-        page: action.page,
-      };
-    case "test":
+      if (action.isScrolling) {
+        return {
+          ...state,
+          fetchedSearch: [...state.fetchedSearch, ...action.results],
+          query: action.query,
+          page: action.page,
+        };
+      } else {
+        return {
+          ...state,
+          fetchedSearch: action.results,
+          query: action.query,
+          page: 1,
+        };
+      }
+    case CLEAR_SEARCHED_MOVIES:
       return {
         ...state,
         fetchedSearch: [],
-        page: state.page + 1,
+
+        query: "",
       };
     default:
       return state;
