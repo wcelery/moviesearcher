@@ -20,7 +20,7 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedMovies: [...state.fetchedMovies, ...action.results],
-        page: action.page,
+        page: action.page + 1,
       };
     case FETCH_MOVIE_DETAILS:
       return {

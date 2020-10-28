@@ -8,7 +8,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(requestMovies());
+    dispatch(requestMovies()); // eslint-disable-next-line
   }, []);
 
   return (

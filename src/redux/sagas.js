@@ -9,6 +9,7 @@ import {
   FETCH_SIMILARS,
   FETCH_SEARCH,
   REQUEST_SEARCH,
+  RECEIVE_TOTAL_PAGES,
 } from "./config";
 import {
   showLoader,
@@ -35,8 +36,9 @@ function* fetchMoviesWorker() {
     yield put({
       type: FETCH_MOVIES,
       results: payload.results,
-      page: payload.page + 1,
+      page: payload.page,
     });
+    yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
   } catch (e) {
     console.log(e);
   }
@@ -59,6 +61,7 @@ function* fetchSearchWorker({ query = "", isScrolling }) {
         results: payload.results,
         page: payload.page,
       });
+      yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
     }
   } catch (e) {
     console.log(e);

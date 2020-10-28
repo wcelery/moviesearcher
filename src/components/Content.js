@@ -4,16 +4,20 @@ import InfiniteScroll from "react-infinite-scroller";
 import Movie from "./Movie";
 import { Loader } from "../assets/components/Loader";
 import NotFound from "../assets/components/NotFound";
-import EmptyQuery from "../assets/components/EmptyQuery";
 import { requestMovies, requestSearch } from "../redux/actions";
 
 export default function Content() {
+  let movies;
+  let page;
+
   //pulling things from state like that:
   const bestMovies = useSelector((state) => state.movies.fetchedMovies);
+  const bestPage = useSelector((state) => state.movies.page);
   const searchedMovies = useSelector((state) => state.search.fetchedSearch);
-  let movies;
-  const loading = useSelector((state) => state.app.loading);
   let query = useSelector((state) => state.search.query);
+  const searchPage = useSelector((state) => state.search.scroll_page);
+  const loading = useSelector((state) => state.app.loading);
+  const totalPages = useSelector((state) => state.app.totalPages);
 
   const dispatch = useDispatch();
 
@@ -21,7 +25,13 @@ export default function Content() {
     return <Loader />;
   }
 
-  query ? (movies = searchedMovies) : (movies = bestMovies);
+  if (query) {
+    movies = searchedMovies;
+    page = searchPage;
+  } else {
+    movies = bestMovies;
+    page = bestPage;
+  }
 
   const fetchMoreData = () => {
     const isScrolling = true;
@@ -32,9 +42,7 @@ export default function Content() {
     }
   };
 
-  if (!movies) {
-    return <EmptyQuery />;
-  } else if (movies.length === 0) {
+  if (!totalPages) {
     return <NotFound />;
   }
 
@@ -43,7 +51,7 @@ export default function Content() {
       pageStart={1}
       initialLoad={false}
       loadMore={() => fetchMoreData()}
-      hasMore={true}
+      hasMore={loading ? false : page <= totalPages}
       loader={<Loader key={-1} />}
     >
       <div className="content">

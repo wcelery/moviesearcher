@@ -12,7 +12,7 @@ export default function MovieDetails(props) {
   let location = useLocation();
 
   React.useEffect(() => {
-    dispatch(fetchMovieDetails(props.match.params.id));
+    dispatch(fetchMovieDetails(props.match.params.id)); // eslint-disable-next-line
   }, [location]); //rerender component if URL was changed
 
   const loading = useSelector((state) => state.app.loading);
