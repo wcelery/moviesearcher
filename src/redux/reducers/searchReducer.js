@@ -4,6 +4,7 @@ const initialState = {
   query: "",
   fetchedSearch: [],
   page: 1,
+  scroll_page: 2,
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -14,7 +15,7 @@ export const searchReducer = (state = initialState, action) => {
           ...state,
           fetchedSearch: [...state.fetchedSearch, ...action.results],
           query: action.query,
-          page: action.page,
+          scroll_page: action.page + 1,
         };
       } else {
         return {
@@ -22,6 +23,7 @@ export const searchReducer = (state = initialState, action) => {
           fetchedSearch: action.results,
           query: action.query,
           page: 1,
+          scroll_page: 2,
         };
       }
     case CLEAR_SEARCHED_MOVIES:

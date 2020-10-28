@@ -45,7 +45,10 @@ function* fetchMoviesWorker() {
 function* fetchSearchWorker({ query = "", isScrolling }) {
   try {
     if (query) {
-      const page = yield select(selector.search_page);
+      let page;
+      const search_page = yield select(selector.search_page);
+      const scroll_page = yield select(selector.scroll_page);
+      isScrolling ? (page = scroll_page) : (page = search_page);
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
       const payload = yield call(fetchMovies, url);
       yield put(clearBestMovies());
@@ -54,7 +57,7 @@ function* fetchSearchWorker({ query = "", isScrolling }) {
         query,
         isScrolling,
         results: payload.results,
-        page: payload.page + 1,
+        page: payload.page,
       });
     }
   } catch (e) {
@@ -75,6 +78,7 @@ function* fetchMovieDetailsWorker({ id }) {
     const similars = yield call(fetchMovieSimilars, genreIds);
 
     yield put({ type: FETCH_SIMILARS, payload: similars });
+
     yield put(hideLoader());
   } catch (e) {
     console.log(e);
