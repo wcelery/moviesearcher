@@ -6,6 +6,8 @@ import {
   REQUEST_SEARCH,
   CLEAR_SEARCHED_MOVIES,
   CLEAR_BEST_MOVIES,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
 } from "./config";
 
 export const requestMovies = () => {
@@ -35,3 +37,19 @@ export function clearSearchedMovies() {
 export function clearBestMovies() {
   return { type: CLEAR_BEST_MOVIES };
 }
+
+export function addToFavorites(movie) {
+  const jsonMovie = JSON.stringify(movie);
+  localStorage.setItem(movie.id, jsonMovie);
+
+  return { type: ADD_TO_FAVORITES, payload: movie };
+}
+
+export const removeFromFavorites = (movie) => {
+  localStorage.removeItem(movie.id);
+
+  return {
+    type: REMOVE_FROM_FAVORITES,
+    payload: movie.id,
+  };
+};

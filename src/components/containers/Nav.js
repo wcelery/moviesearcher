@@ -6,10 +6,12 @@ export default function Nav() {
     <div className="nav">
       <h3>logo</h3>
       <div className="nav-links">
-        <Link to="/search">
+        <Link to="/favorites">
           <li>some link</li>
         </Link>
-        <li>another link</li>
+        <Link to="/favorites">
+          <li>another link</li>
+        </Link>
       </div>
     </div>
   );

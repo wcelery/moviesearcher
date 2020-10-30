@@ -1,11 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../redux/actions";
 
 export default function Movie({ poster, title, id }) {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favoriteStore.favorites);
+
+  const parse = (poster, title, id) => {
+    return {
+      poster: poster,
+      title: title,
+      id: id,
+    };
+  };
+  let movie = parse(poster, title, id);
+  let isFavourite = movie.id in favorites;
+  const isStored = (value) => {
+    if (value) {
+      dispatch(removeFromFavorites(movie));
+    } else {
+      dispatch(addToFavorites(movie));
+    }
+  };
+
   return (
     <div className="movie">
       <div className="overlay">
-        <Link to={`/${id}`}>
+        <Link to={`/movie${id}`}>
           <img
             src={`https://image.tmdb.org/t/p/original${poster}`}
             alt=""
@@ -15,7 +37,13 @@ export default function Movie({ poster, title, id }) {
       </div>
 
       <h1 className="title">{title}</h1>
-      <button className="like-icon">
+      <button
+        className="like-icon"
+        onClick={() => {
+          isStored(isFavourite);
+          console.log("clicked");
+        }}
+      >
         <svg
           width="24"
           height="24"
