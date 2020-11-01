@@ -15,7 +15,9 @@ export default function Movie({ poster, title, id }) {
     };
   };
   let movie = parse(poster, title, id);
+
   let isFavourite = movie.id in favorites;
+
   const isStored = (value) => {
     if (value) {
       dispatch(removeFromFavorites(movie));

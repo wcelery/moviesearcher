@@ -24,7 +24,7 @@ export const favoritesReducer = (state = initialState, action) => {
       return {
         ...state,
         favorites: Object.keys(state.favorites)
-          .filter((item) => item !== action.payload.id.toString())
+          .filter((item) => item !== action.payload.toString())
           .reduce(
             (object, item) => ({ ...object, [item]: state.favorites[item] }),
             {}
