@@ -1,12 +1,36 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../redux/actions";
 
 export default function Details() {
+  const dispatch = useDispatch();
+
   const details = useSelector((state) => state.movies.fetchedDetails);
   const genres = useSelector((state) => state.movies.fetchedGenres);
+  const favorites = useSelector((state) => state.favoriteStore.favorites);
 
   const genreNames = genres.map((genre) => genre.name);
+
+  const parse = (poster, title, id) => {
+    return {
+      poster: poster,
+      title: title,
+      id: id,
+    };
+  };
+  let movie = parse(details.poster_path, details.title, details.id);
+
+  let isFavorite = movie.id in favorites;
+
+  const isStored = (value) => {
+    if (value) {
+      dispatch(removeFromFavorites(movie));
+    } else {
+      dispatch(addToFavorites(movie));
+    }
+  };
+
   return (
     <div className="details">
       <img
@@ -16,7 +40,7 @@ export default function Details() {
       />
       <div className="text">
         <h1 className="movie-title">{details.title}</h1>
-        <p className="overview">{details.overview}</p>
+        <p className="description">{details.overview}</p>
         <section className="info">
           <table>
             <tbody>
@@ -48,7 +72,14 @@ export default function Details() {
             </button>
           ))}
         </section>
-        <button className="add-to-fav">Add to favorites</button>
+        <button
+          className="add-to-fav"
+          onClick={() => {
+            isStored(isFavorite);
+          }}
+        >
+          {isFavorite ? "Added to favorites" : "Add to favorites"}
+        </button>
       </div>
     </div>
   );

@@ -86,7 +86,7 @@ body {
   font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
 }
 
-.overview {
+.description {
   margin-block-start: 0em;
 }
 
@@ -185,17 +185,14 @@ button {
 }
 
 .title {
+  white-space: nowrap;
   font-size: 16px;
-  color: #eee;
 }
 
-.like-icon {
-  background-color: rgba(238, 238, 238, 0);
-  border: none;
-  max-width: fit-content;
-  max-height: fit-content;
-  padding: 0px;
-  cursor: pointer;
+.overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .search-icon {
@@ -227,28 +224,15 @@ button {
     contrast(73%);
 }
 
-.movie:hover .title {
-  display: block;
-}
-
 .movie:hover .like-icon {
   display: block;
-}
-
-.movie .title {
-  position: absolute;
-  display: none;
-  top: 25%;
-  left: 25%;
-  text-align: center;
-  width: 50%;
 }
 
 .movie .like-icon {
   position: absolute;
   display: none;
-  top: 0;
-  left: 50%;
+  top: 80%;
+  left: 42%;
 }
 
 .movie:hover > .overlay {
