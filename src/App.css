@@ -61,7 +61,7 @@ body {
 }
 
 .wrapper {
-  padding: 0px 80px 50px 80px;
+  padding: 0px 100px 50px 100px;
 }
 
 .details {
@@ -189,6 +189,21 @@ button {
   font-size: 16px;
 }
 
+.back-btn {
+  text-decoration: none;
+  color: #f54c4c;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
+  text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.397);
+}
+
+.test {
+  position: absolute;
+  top: 85px;
+  left: -80px;
+}
+
 .overview {
   display: flex;
   justify-content: space-between;
@@ -199,21 +214,6 @@ button {
   margin: 0px 6px 0px 6px;
 }
 
-.send-icon {
-  margin-left: 10px;
-  background-color: rgba(238, 238, 238, 0);
-  border: none;
-  max-width: fit-content;
-  max-height: fit-content;
-  padding: 0px;
-  cursor: pointer;
-}
-
-.send-icon:focus {
-  outline: none;
-  box-shadow: inset 0 0 0 2px #aaaaaa;
-}
-
 .svg-filter-red {
   filter: invert(66%) sepia(84%) saturate(7015%) hue-rotate(343deg)
     brightness(99%) contrast(93%);
@@ -222,27 +222,6 @@ button {
 .svg-filter-grey {
   filter: invert(93%) sepia(0%) saturate(45%) hue-rotate(152deg) brightness(90%)
     contrast(73%);
-}
-
-.movie:hover .like-icon {
-  display: block;
-}
-
-.movie .like-icon {
-  position: absolute;
-  display: none;
-  top: 80%;
-  left: 42%;
-}
-
-.movie:hover > .overlay {
-  filter: brightness(40%);
-  -webkit-filter: brightness(40%);
-  -webkit-transition: all 0.6s ease;
-  -moz-transition: all 0.6s ease;
-  -o-transition: all 0.6s ease;
-  -ms-transition: all 0.6s ease;
-  transition: all 0.6s ease;
 }
 
 .search-wrapper {

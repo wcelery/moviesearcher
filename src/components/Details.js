@@ -78,7 +78,7 @@ export default function Details() {
             isStored(isFavorite);
           }}
         >
-          {isFavorite ? "Added to favorites" : "Add to favorites"}
+          {isFavorite ? "Remove from favorites" : "Add to favorites"}
         </button>
       </div>
     </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware, compose } from "redux";
-import { rootReducer } from "./redux/reducers/rootReducer";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import "./index.css";
 import App from "./App";
+import { rootReducer } from "./redux/reducers/rootReducer";
 import { sagaWatcher } from "./redux/sagas";
 
 const saga = createSagaMiddleware();
@@ -16,9 +17,11 @@ saga.run(sagaWatcher);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

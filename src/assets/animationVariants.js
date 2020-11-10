@@ -1,24 +1,3 @@
-export const textMotion = {
-  rest: {
-    color: "grey",
-    x: 0,
-    transition: {
-      duration: 2,
-      type: "tween",
-      ease: "easeIn",
-    },
-  },
-  hover: {
-    color: "blue",
-    x: 30,
-    transition: {
-      duration: 0.4,
-      type: "tween",
-      ease: "easeOut",
-    },
-  },
-};
-
 export const detailsMotion = {
   rest: { opacity: 0, ease: "easeOut", duration: 0.2, type: "tween" },
   hover: {
@@ -29,4 +8,36 @@ export const detailsMotion = {
       ease: "easeIn",
     },
   },
+};
+
+export const pageVariants = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    opacity: 1,
+    ease: "easeIn",
+    duration: 0.2,
+  },
+  out: {
+    opacity: 0,
+    ease: "easeOut",
+    duration: 0.2,
+  },
+};
+
+export const pageTransition = {
+  type: "tween",
+  ease: "easeIn",
+  duration: 0.2,
+};
+
+const transition = {
+  duration: 1,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
+
+export const backVariants = {
+  exit: { x: 0, opacity: 0, transition },
+  enter: { x: 100, opacity: 1, transition: { delay: 1, ...transition } },
 };
