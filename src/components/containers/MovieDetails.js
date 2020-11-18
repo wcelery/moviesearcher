@@ -36,14 +36,25 @@ export default function MovieDetails(props) {
     >
       <div className="wrapper">
         <motion.div
-          className="test"
+          className="back-btn-container"
           initial="exit"
           animate="enter"
           exit="exit"
           variants={backVariants}
         >
           <Link to="/" className="back-btn">
-            ⬅Back
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              className="svg-filter-grey"
+            >
+              <polygon
+                fillRule="evenodd"
+                points="9.414 12 16.707 19.293 15.293 20.707 6.586 12 15.293 3.293 16.707 4.707"
+              />
+            </svg>
+            <span>back</span>
           </Link>
         </motion.div>
         <Details />

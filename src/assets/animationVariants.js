@@ -12,6 +12,7 @@ export const detailsMotion = {
 
 export const pageVariants = {
   initial: {
+    ease: "easeIn",
     opacity: 0,
   },
   in: {

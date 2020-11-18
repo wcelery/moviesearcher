@@ -15,7 +15,7 @@ export default function Favorites() {
       transition={pageTransition}
     >
       <div className="favorites">
-        <h1>this is favorites</h1>
+        <h1 className="favorites-header">Favorites</h1>
         <div className="content">
           {Object.values(favorites).map((favorite) => (
             <Movie
