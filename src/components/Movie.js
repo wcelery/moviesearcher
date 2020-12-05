@@ -60,7 +60,7 @@ export default function Movie({ poster, title, id }) {
             onClick={() => {
               isStored(isFavorite);
             }}
-            size={40}
+            size={32}
             animation={heart}
             strokeColor="#f54c4c"
             pathCss="fill: #f54c4c; cursor: pointer"
