@@ -1,11 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
 import InfiniteScroll from "react-infinite-scroller";
 import Movie from "./Movie";
 import { Loader } from "../assets/components/Loader";
 import NotFound from "../assets/components/NotFound";
-import { pageVariants, pageTransition } from "../assets/animationVariants";
 import { requestMovies, requestSearch } from "../redux/actions";
 
 export default function Content() {
@@ -49,31 +47,23 @@ export default function Content() {
   }
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
+    <InfiniteScroll
+      pageStart={1}
+      initialLoad={false}
+      loadMore={() => fetchMoreData()}
+      hasMore={loading ? false : page <= totalPages}
+      loader={<Loader key={-1} />}
     >
-      <InfiniteScroll
-        pageStart={1}
-        initialLoad={false}
-        loadMore={() => fetchMoreData()}
-        hasMore={loading ? false : page <= totalPages}
-        loader={<Loader key={-1} />}
-      >
-        <div className="content">
-          {movies.map((movie) => (
-            <Movie
-              key={movie.id}
-              poster={movie.poster_path}
-              title={movie.title}
-              id={movie.id}
-            />
-          ))}
-        </div>
-      </InfiniteScroll>
-    </motion.div>
+      <div className="content">
+        {movies.map((movie) => (
+          <Movie
+            key={movie.id}
+            poster={movie.poster_path}
+            title={movie.title}
+            id={movie.id}
+          />
+        ))}
+      </div>
+    </InfiniteScroll>
   );
 }
