@@ -9,9 +9,8 @@ export default function Nav() {
         <Link to="/favorites">
           <li>some link</li>
         </Link>
-        <Link to="/favorites">
-          <li>another link</li>
-        </Link>
+
+        <li>another link</li>
       </div>
     </div>
   );
