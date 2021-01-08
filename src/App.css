@@ -231,13 +231,14 @@ button {
 .search-wrapper {
   display: flex;
   align-items: center;
+  margin: 50px 0px 50px 0px;
 }
 
 .search-bar {
-  background-color: #6a6a6a;
+  /* background-color: #6a6a6a; */
   border-radius: 3px;
   display: flex;
-  height: 30px;
+  height: 60px;
   align-items: center;
   min-width: 300px;
 }
@@ -246,17 +247,17 @@ button {
   width: 100%;
   height: 100%;
   border-radius: 3px;
-  background-color: #6a6a6a;
+  background-color: rgba(106, 106, 106, 0);
   border: none;
   padding: 0px 6px 0px 6px;
-  color: #979797;
+  color: #000;
   font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 45px;
 }
 
 .search::placeholder {
   opacity: 1;
-  color: #979797;
+  color: #000;
 }
 
 .search:focus {

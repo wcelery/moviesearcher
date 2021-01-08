@@ -46,7 +46,11 @@ export default function Movie({ poster, title, id }) {
       <motion.div initial="rest" whileHover="hover" animate="rest">
         <Link to={`/movie${id}`}>
           <img
-            src={`https://image.tmdb.org/t/p/original${poster}`}
+            src={
+              poster
+                ? `https://image.tmdb.org/t/p/original${poster}`
+                : "http://placehold.it/210x315&text=No poster"
+            }
             alt=""
             width="210"
           />
