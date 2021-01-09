@@ -56,9 +56,9 @@ body {
 
 .content {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 48px;
+  grid-gap: 24px;
   overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 
 .wrapper {
@@ -208,6 +208,8 @@ button {
 
 .overview {
   display: flex;
+  flex: none;
+  width: 210px;
   justify-content: space-between;
   align-items: center;
 }
@@ -282,4 +284,20 @@ button {
   width: 15px !important;
   min-width: 15px !important;
   font-size: 0.7rem !important;
+}
+
+.alert-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.alert-msg h1 {
+  margin: 0;
+  font-size: 5rem;
+}
+
+.alert-msg p {
+  font-size: 1.2rem;
 }

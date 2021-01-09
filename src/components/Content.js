@@ -7,6 +7,7 @@ import { Loader } from "../assets/components/Loader";
 import NotFound from "../assets/components/NotFound";
 import { pageVariants, pageTransition } from "../assets/animationVariants";
 import { requestMovies, requestSearch } from "../redux/actions";
+import EmptyQuery from "../assets/components/EmptyQuery";
 
 export default function Content() {
   let movies;
@@ -19,6 +20,7 @@ export default function Content() {
   let query = useSelector((state) => state.search.query);
   const searchPage = useSelector((state) => state.search.scroll_page);
   const loading = useSelector((state) => state.app.loading);
+  const failed = useSelector((state) => state.app.searchFailed);
   const totalPages = useSelector((state) => state.app.totalPages);
 
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ export default function Content() {
     return <Loader />;
   }
 
+  console.log(failed);
   if (query) {
     movies = searchedMovies;
     page = searchPage;
@@ -43,6 +46,10 @@ export default function Content() {
       dispatch(requestMovies());
     }
   };
+
+  if (!movies) {
+    return <EmptyQuery />;
+  }
 
   if (!totalPages) {
     return <NotFound />;

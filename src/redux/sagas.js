@@ -63,8 +63,8 @@ function* fetchSearchWorker({ query = "", isScrolling }) {
       });
       yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
     }
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 }
 

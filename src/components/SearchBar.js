@@ -9,7 +9,7 @@ export default function SearchBar() {
   return (
     <form className="search-wrapper">
       <div className="search-bar">
-        <SearchSvg className=" search-icon" />
+        <SearchSvg className="search-icon" />
         <DebounceInput
           minLength={3}
           debounceTimeout={200}
