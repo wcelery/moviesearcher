@@ -55,10 +55,10 @@ body {
 }
 
 .content {
-  display: grid;
-  grid-gap: 24px;
-  overflow: hidden;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  flex-wrap: wrap;
 }
 
 .wrapper {
@@ -107,8 +107,9 @@ img {
 
 .similar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 48px;
+  grid-gap: 24px;
+  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 
 .similar-title {
@@ -182,7 +183,7 @@ button {
 }
 
 .movie {
-  position: relative;
+  margin: 0px 20px 20px 20px;
 }
 
 .title {
@@ -233,16 +234,16 @@ button {
 .search-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 50px 0px 50px 0px;
 }
 
 .search-bar {
-  /* background-color: #6a6a6a; */
   border-radius: 3px;
   display: flex;
   height: 60px;
   align-items: center;
-  min-width: 300px;
+  width: 85%;
 }
 
 .search {
@@ -280,9 +281,9 @@ button {
 
 .badge-style {
   background-color: #f54c4c !important;
-  height: 15px !important;
-  width: 15px !important;
-  min-width: 15px !important;
+  height: 1.2em !important;
+  width: 1.2em !important;
+  min-width: 1.2em !important;
   font-size: 0.7rem !important;
 }
 
@@ -300,4 +301,72 @@ button {
 
 .alert-msg p {
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 500px) {
+  .search {
+    font-size: 1.5rem;
+  }
+
+  .search-icon {
+    width: 2em;
+  }
+
+  .wrapper {
+    padding: 0px 10px 50px 15px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+  }
+
+  .movie-title {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    font-size: 2em;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+
+  .tags {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
+
+  .similar-title {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    font-size: 2.5em;
+  }
+
+  .nav {
+    justify-content: flex-end;
+    padding: 0em 1em 0em 5em;
+  }
+
+  .similar {
+    padding-left: 2.5em;
+  }
+
+  .alert-msg h1 {
+    font-size: 1.5rem;
+  }
+
+  .alert-msg p {
+    font-size: 0.9rem;
+  }
+
+  .tooltip {
+    position: absolute !important;
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    left: 0 !important;
+  }
 }

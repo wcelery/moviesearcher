@@ -23,7 +23,12 @@ export default function Nav() {
           </Badge>
         </Link>
         <GithubSvg className="svg-filter-grey about-btn" data-tip="data-tip" />
-        <ReactTooltip place="bottom" type="dark" effect="solid">
+        <ReactTooltip
+          className="tooltip"
+          place="bottom"
+          type="dark"
+          effect="solid"
+        >
           <p>github: /wcelery</p>
           <p>created despite laziness and procrastination</p>
         </ReactTooltip>
