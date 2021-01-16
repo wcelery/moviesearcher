@@ -20,7 +20,6 @@ export default function Content() {
   let query = useSelector((state) => state.search.query);
   const searchPage = useSelector((state) => state.search.scroll_page);
   const loading = useSelector((state) => state.app.loading);
-  const failed = useSelector((state) => state.app.searchFailed);
   const totalPages = useSelector((state) => state.app.totalPages);
 
   const dispatch = useDispatch();
@@ -29,7 +28,6 @@ export default function Content() {
     return <Loader />;
   }
 
-  console.log(failed);
   if (query) {
     movies = searchedMovies;
     page = searchPage;
