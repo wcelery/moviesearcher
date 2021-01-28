@@ -2,9 +2,10 @@
 
 Usage:
 
-### 1. `cd %%repo_folder%%`
-### 2. `npm i`
-### 3. `npm start`
+### 1. `git clone`
+### 2. `cd %%repo_folder%%`
+### 3. `npm i`
+### 4. `npm start`
 
 ## Or just use the demo
 
