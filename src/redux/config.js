@@ -1,4 +1,4 @@
-export const API_KEY = `${process.env.REACT_SECRET_API_KEY}`;
+export const API_KEY = `${process.env.REACT_APP_SECRET_API_KEY}`;
 
 export const FETCH_MOVIES = "FETCH_MOVIES";
 export const REQUEST_MOVIES = "REQUEST_MOVIES";

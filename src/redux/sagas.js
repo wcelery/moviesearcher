@@ -65,8 +65,8 @@ function* fetchSearchWorker({ query = "", isScrolling }) {
       });
       yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
     }
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    yield put({ type: ERROR_FETCH });
   }
 }
 
@@ -86,7 +86,7 @@ function* fetchMovieDetailsWorker({ id }) {
 
     yield put(hideLoader());
   } catch (e) {
-    console.log(e);
+    yield put({ type: ERROR_FETCH });
   }
 }
 
