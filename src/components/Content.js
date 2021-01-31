@@ -5,9 +5,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import Movie from "./Movie";
 import { Loader } from "../assets/components/Loader";
 import NotFound from "../assets/components/NotFound";
+import EmptyQuery from "../assets/components/EmptyQuery";
+import Error from "../assets/components/Error";
 import { pageVariants, pageTransition } from "../assets/animationVariants";
 import { requestMovies, requestSearch } from "../redux/actions";
-import EmptyQuery from "../assets/components/EmptyQuery";
 
 export default function Content() {
   let movies;
@@ -21,6 +22,7 @@ export default function Content() {
   const searchPage = useSelector((state) => state.search.scroll_page);
   const loading = useSelector((state) => state.app.loading);
   const totalPages = useSelector((state) => state.app.totalPages);
+  const isError = useSelector((state) => state.app.isError);
 
   const dispatch = useDispatch();
 
@@ -53,6 +55,10 @@ export default function Content() {
     return <NotFound />;
   }
 
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <motion.div
       initial="initial"
@@ -69,7 +75,7 @@ export default function Content() {
         loader={<Loader key={-1} />}
       >
         <div className="content">
-          {movies.map((movie) => (
+          {movies?.map((movie) => (
             <Movie
               key={movie.id}
               poster={movie.poster_path}

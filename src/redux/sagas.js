@@ -10,6 +10,7 @@ import {
   FETCH_SEARCH,
   REQUEST_SEARCH,
   RECEIVE_TOTAL_PAGES,
+  ERROR_FETCH,
 } from "./config";
 import {
   showLoader,
@@ -40,7 +41,8 @@ function* fetchMoviesWorker() {
     });
     yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
   } catch (e) {
-    console.log(e);
+    yield put({ type: ERROR_FETCH });
+    /*  console.log(e); */
   }
 }
 

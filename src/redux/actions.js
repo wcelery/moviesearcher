@@ -8,6 +8,7 @@ import {
   CLEAR_BEST_MOVIES,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
+  /*RESET_ERROR_FETCH,*/
 } from "./config";
 
 export const requestMovies = () => {
@@ -25,6 +26,12 @@ export function showLoader() {
 export function hideLoader() {
   return { type: HIDE_LOADER };
 }
+
+/*someday i'll figure out, how to reset the error properly, but for now user must reload the page*/
+
+/* export function resetError() {   
+  return { type: RESET_ERROR_FETCH };
+} */
 
 export const requestSearch = (query, isScrolling) => {
   return { type: REQUEST_SEARCH, query, isScrolling };
