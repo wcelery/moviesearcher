@@ -9,6 +9,7 @@ import {
   backVariants,
 } from "../../assets/animationVariants";
 import { Loader } from "../../assets/components/Loader";
+import { ReactComponent as BackSvg } from "../../assets/svg/search.svg";
 import Similars from "../Similars";
 import Details from "../Details";
 
@@ -43,17 +44,7 @@ export default function MovieDetails(props) {
           variants={backVariants}
         >
           <Link to="/" className="back-btn">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="svg-filter-grey"
-            >
-              <polygon
-                fillRule="evenodd"
-                points="9.414 12 16.707 19.293 15.293 20.707 6.586 12 15.293 3.293 16.707 4.707"
-              />
-            </svg>
+            <BackSvg className="svg-filter-grey" />
             <span>back</span>
           </Link>
         </motion.div>
