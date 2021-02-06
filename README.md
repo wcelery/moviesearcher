@@ -4,8 +4,9 @@ Usage:
 
 ### 1. `git clone`
 ### 2. `cd %%repo_folder%%`
-### 3. `npm i`
-### 4. `npm start`
+### 3. `npm config set '@bit:registry' https://node.bit.dev`
+### 4. `npm i`
+### 5. `npm start`
 
 ## Or just use demo
 
