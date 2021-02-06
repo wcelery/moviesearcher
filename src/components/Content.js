@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import InfiniteScroll from "react-infinite-scroller";
 import Movie from "./Movie";
 import { Loader } from "../assets/components/Loader";
-import NotFound from "../assets/components/NotFound";
-import EmptyQuery from "../assets/components/EmptyQuery";
-import Error from "../assets/components/Error";
+import AlertMessage from "../assets/components/AlertMessage";
 import { pageVariants, pageTransition } from "../assets/animationVariants";
 import { requestMovies, requestSearch } from "../redux/actions";
 
@@ -48,15 +46,30 @@ export default function Content() {
   };
 
   if (!movies) {
-    return <EmptyQuery />;
+    return (
+      <AlertMessage
+        primaryText="No empty strings!"
+        secondaryText="Please, specify a query to search."
+      />
+    );
   }
 
   if (!totalPages) {
-    return <NotFound />;
+    return (
+      <AlertMessage
+        primaryText="Not Found"
+        secondaryText="Try to search for something else."
+      />
+    );
   }
 
   if (isError) {
-    return <Error />;
+    return (
+      <AlertMessage
+        primaryText="An error occurred"
+        secondaryText="Must be an API error, check back later."
+      />
+    );
   }
 
   return (
