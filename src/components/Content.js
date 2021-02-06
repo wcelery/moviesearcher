@@ -1,11 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
 import InfiniteScroll from "react-infinite-scroller";
 import Movie from "./Movie";
+import ContentContainer from "./containers/ContentContainer";
 import { Loader } from "../assets/components/Loader";
-import AlertMessage from "../assets/components/AlertMessage";
-import { pageVariants, pageTransition } from "../assets/animationVariants";
 import { requestMovies, requestSearch } from "../redux/actions";
 
 export default function Content() {
@@ -20,13 +18,8 @@ export default function Content() {
   const searchPage = useSelector((state) => state.search.scroll_page);
   const loading = useSelector((state) => state.app.loading);
   const totalPages = useSelector((state) => state.app.totalPages);
-  const isError = useSelector((state) => state.app.isError);
 
   const dispatch = useDispatch();
-
-  if (loading) {
-    return <Loader />;
-  }
 
   if (query) {
     movies = searchedMovies;
@@ -45,41 +38,8 @@ export default function Content() {
     }
   };
 
-  if (!movies) {
-    return (
-      <AlertMessage
-        primaryText="No empty strings!"
-        secondaryText="Please, specify a query to search."
-      />
-    );
-  }
-
-  if (!totalPages) {
-    return (
-      <AlertMessage
-        primaryText="Not Found"
-        secondaryText="Try to search for something else."
-      />
-    );
-  }
-
-  if (isError) {
-    return (
-      <AlertMessage
-        primaryText="An error occurred"
-        secondaryText="Must be an API error, check back later."
-      />
-    );
-  }
-
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-    >
+    <ContentContainer movies={movies}>
       <InfiniteScroll
         pageStart={1}
         initialLoad={false}
@@ -98,6 +58,6 @@ export default function Content() {
           ))}
         </div>
       </InfiniteScroll>
-    </motion.div>
+    </ContentContainer>
   );
 }
