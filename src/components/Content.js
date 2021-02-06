@@ -14,7 +14,7 @@ export default function Content() {
   let movies;
   let page;
 
-  //pulling things from state like that:
+  //pulling things from store like that:
   const bestMovies = useSelector((state) => state.movies.fetchedMovies);
   const bestPage = useSelector((state) => state.movies.page);
   const searchedMovies = useSelector((state) => state.search.fetchedSearch);
