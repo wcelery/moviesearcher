@@ -2,10 +2,21 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import Movie from "./Movie";
+import AlertMessage from "../assets/components/AlertMessage";
 import { pageVariants, pageTransition } from "../assets/animationVariants";
 
 export default function Favorites() {
   const favorites = useSelector((state) => state.favoriteStore.favorites);
+
+  if (!Object.values(favorites).length) {
+    return (
+      <AlertMessage
+        primaryText="No Favorites"
+        secondaryText="Add movies to favorites by pressing heart icon next to title."
+      />
+    );
+  }
+
   return (
     <motion.div
       initial="initial"
