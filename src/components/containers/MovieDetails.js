@@ -9,7 +9,7 @@ import {
   backVariants,
 } from "../../assets/animationVariants";
 import { Loader } from "../../assets/components/Loader";
-import { ReactComponent as BackSvg } from "../../assets/svg/search.svg";
+import { ReactComponent as BackSvg } from "../../assets/svg/back.svg";
 import Similars from "../Similars";
 import Details from "../Details";
 
