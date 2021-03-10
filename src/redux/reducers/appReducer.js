@@ -1,5 +1,5 @@
 import {
-  ERROR_FETCH,
+  FETCH_ERROR,
   SHOW_LOADER,
   HIDE_LOADER,
   RECEIVE_TOTAL_PAGES,
@@ -18,9 +18,9 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case HIDE_LOADER:
       return { ...state, loading: false };
-    case ERROR_FETCH:
+    case FETCH_ERROR:
       return { ...state, isError: true };
-    /* case RESET_ERROR_FETCH:
+    /* case RESET_FETCH_ERROR:
       return { ...state, isError: false }; */
     case RECEIVE_TOTAL_PAGES:
       return { ...state, totalPages: action.payload };

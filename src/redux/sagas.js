@@ -2,23 +2,23 @@ import { takeEvery, put, call, select } from "redux-saga/effects";
 import {
   REQUEST_MOVIES,
   API_KEY,
-  FETCH_MOVIES,
   REQUEST_MOVIE_DETAILS,
-  FETCH_MOVIE_DETAILS,
-  FETCH_GENRES,
-  FETCH_SIMILARS,
-  FETCH_SEARCH,
   REQUEST_SEARCH,
-  RECEIVE_TOTAL_PAGES,
-  ERROR_FETCH,
 } from "./config";
+import { showLoader, hideLoader } from "./reducers/actions/appActions";
 import {
-  showLoader,
-  hideLoader,
+  actionFetchMovieDetails,
+  actionFetchMovies,
+  fetchGenres,
+  fetchSimilars,
   clearBestMovies,
-  clearSearchedMovies,
-} from "./actions";
+} from "./reducers/actions/movieActions";
 import * as selector from "./selectors";
+import { fetchError, receiveTotalPages } from "./reducers/actions/appActions";
+import {
+  fetchSearch,
+  clearSearchedMovies,
+} from "./reducers/actions/searchActions";
 
 export function* sagaWatcher() {
   /* catch every action that have type REQUEST_MOVIES, etc and apply a function to it*/
@@ -34,14 +34,10 @@ function* fetchMoviesWorker() {
     `;
     const payload = yield call(fetchMovies, url);
     yield put(clearSearchedMovies());
-    yield put({
-      type: FETCH_MOVIES,
-      results: payload.results,
-      page: payload.page,
-    });
-    yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
+    yield put(actionFetchMovies(payload.results, payload.page));
+    yield put(receiveTotalPages(payload.total_pages));
   } catch (e) {
-    yield put({ type: ERROR_FETCH });
+    yield put(fetchError());
     /*  console.log(e); */
   }
 }
@@ -56,17 +52,11 @@ function* fetchSearchWorker({ query = "", isScrolling }) {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
       const payload = yield call(fetchMovies, url);
       yield put(clearBestMovies());
-      yield put({
-        type: FETCH_SEARCH,
-        query,
-        isScrolling,
-        results: payload.results,
-        page: payload.page,
-      });
-      yield put({ type: RECEIVE_TOTAL_PAGES, payload: payload.total_pages });
+      yield put(fetchSearch(query, isScrolling, payload.results, payload.page));
+      yield put(receiveTotalPages(payload.total_pages));
     }
   } catch (e) {
-    yield put({ type: ERROR_FETCH });
+    yield put(fetchError());
   }
 }
 
@@ -76,17 +66,17 @@ function* fetchMovieDetailsWorker({ id }) {
 
     const details = yield call(fetchMovieDetails, id);
 
-    yield put({ type: FETCH_MOVIE_DETAILS, payload: details });
-    yield put({ type: FETCH_GENRES, payload: details.genres });
+    yield put(actionFetchMovieDetails(details));
+    yield put(fetchGenres(details.genres));
 
     const genreIds = details.genres.map((genre) => genre.id);
     const similars = yield call(fetchMovieSimilars, genreIds);
 
-    yield put({ type: FETCH_SIMILARS, payload: similars });
+    yield put(fetchSimilars(similars));
 
     yield put(hideLoader());
   } catch (e) {
-    yield put({ type: ERROR_FETCH });
+    yield put(fetchError());
   }
 }
 

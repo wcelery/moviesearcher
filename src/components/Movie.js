@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import heart from "react-useanimations/lib/heart";
 import { motion } from "framer-motion";
 import UseAnimations from "react-useanimations";
-import { addToFavorites, removeFromFavorites } from "../redux/actions";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../redux/reducers/actions/favoritesActions";
 import { detailsMotion } from "../assets/animationVariants";
 
 export default function Movie({ poster, title, id }) {
