@@ -1,20 +1,11 @@
-import {
-  hideLoader,
-  showLoader,
-  fetchError,
-  receiveTotalPages,
-} from "../actions/appActions";
+import { hideLoader, showLoader, fetchError } from "../actions/appActions";
 import { appReducer } from "../appReducer";
-import { appReducerRequest } from "./__mocks__/appReducerRequest";
 
 let state;
-
-jest.mock("./__mocks__/appReducerRequest");
 
 beforeEach(() => {
   state = {
     loading: false,
-    totalPages: 0,
     isError: false,
   };
 });
@@ -31,6 +22,7 @@ describe("should set loading to true/false", () => {
   });
 });
 
-it("should receive total pages", () => {
-  const newState = appReducer(state, receiveTotalPages());
+it("should trigger isError to true", () => {
+  const newState = appReducer(state, fetchError());
+  expect(newState.isError).toBeTruthy();
 });

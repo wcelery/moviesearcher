@@ -30,7 +30,6 @@ export const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedSearch: [],
-
         query: "",
       };
     default:
