@@ -1,24 +1,63 @@
-@font-face {
-  font-family: "Helvetica Neue Cyr Roman";
-  src: url("./assets/fonts/HelveticaNeueCyr-Roman.eot");
-  src: url("./assets/fonts/HelveticaNeueCyr-Roman.eot?#iefix")
-      format("embedded-opentype"),
-    url("./assets/fonts/HelveticaNeueCyr-Roman.woff") format("woff"),
-    url("./assets/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+@mixin font-face(
+  $font-name,
+  $font-path,
+  // path + file name. Ex : path/to/font/filename
+  $font-weight: 400,
+  $font-style: normal,
+  $support-required: "modern"
+) {
+  @font-face {
+    font-family: $font-name;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    @if $support-required== "oldie" {
+      src: url("#{$font-path}.eot");
+      src: url("#{$font-path}.eot?#iefix") format("embedded-opentype"),
+        url("#{$font-path}.woff2") format("woff2"),
+        url("#{$font-path}.woff") format("woff"),
+        url("#{$font-path}.ttf") format("truetype");
+    }
+    @if $support-required== "recent" {
+      src: url("#{$font-path}.woff2") format("woff2"),
+        url("#{$font-path}.woff") format("woff"),
+        url("#{$font-path}.ttf") format("truetype");
+    }
+    @if $support-required== "modern" {
+      src: url("#{$font-path}.woff2") format("woff2"),
+        url("#{$font-path}.woff") format("woff");
+    }
+  }
+  @if $support-required !=
+    "oldie" and
+    $support-required !=
+    "recent" and
+    $support-required !=
+    "modern"
+  {
+    @error 'Invalid support-required value. Must be "oldie"==>IE8 and above/ Android native browser 4+/ Safari 4.3 OR "recent"==>IE9+/ Android native browser 4.0+/ Safari 4.3+ OR "modern"==>IE9+/ Android native browser 4.4+/ Safari 5.1+';
+  }
 }
 
-@font-face {
-  font-family: "Helvetica Neue Cyr Medium";
-  src: url("./assets/fonts/HelveticaNeueCyr-Medium.eot");
-  src: url("./assets/fonts/HelveticaNeueCyr-Medium.eot?#iefix")
-      format("embedded-opentype"),
-    url("./assets/fonts/HelveticaNeueCyr-Medium.woff") format("woff"),
-    url("./assets/fonts/HelveticaNeueCyr-Medium.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+@mixin margin-block-1em() {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 }
+
+@include font-face(
+  "Helvetica Neue Cyr Roman",
+  "./assets/fonts/HelveticaNeueCyr-Roman",
+  400,
+  normal,
+  "oldie"
+);
+
+@include font-face(
+  "Helvetica Neue Cyr Medium",
+  "./assets/fonts/HelveticaNeueCyr-Medium",
+  500,
+  normal,
+  "oldie"
+);
 
 body {
   background-color: #eee;
@@ -135,14 +174,13 @@ button {
   font-size: 18px;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.genre:hover {
-  cursor: pointer;
-  transform: translateY(-2px);
-  -webkit-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
-  box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    -webkit-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 3px 4px 0px rgba(34, 60, 80, 0.2);
+  }
 }
 
 .add-to-fav {
@@ -159,27 +197,24 @@ button {
   z-index: 1;
   outline: 0;
   color: #f54c4c;
-}
-
-.add-to-fav:hover {
-  color: whitesmoke;
-}
-
-.add-to-fav:before {
-  content: "";
-  position: absolute;
-  background: #f54c4c;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 100%;
-  z-index: -1;
-  transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-  -webkit-transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.add-to-fav:hover:before {
-  top: 0;
+  &:hover {
+    color: whitesmoke;
+    &::before {
+      top: 0;
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    background: #f54c4c;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+    -webkit-transition: top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  }
 }
 
 .movie {
@@ -256,16 +291,14 @@ button {
   color: #000;
   font-family: "Helvetica Neue Cyr Medium", Liberation Sans, Arial, sans-serif;
   font-size: 45px;
-}
-
-.search::placeholder {
-  opacity: 1;
-  color: #000;
-}
-
-.search:focus {
-  outline: none;
-  box-shadow: inset 0 0 0 2px #aaaaaa;
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px #aaaaaa;
+  }
+  &::placeholder {
+    opacity: 1;
+    color: #000;
+  }
 }
 
 .favorites {
@@ -292,15 +325,13 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.alert-msg h1 {
-  margin: 0;
-  font-size: 5rem;
-}
-
-.alert-msg p {
-  font-size: 1.2rem;
+  h1 {
+    margin: 0;
+    font-size: 5rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -323,8 +354,7 @@ button {
   }
 
   .movie-title {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+    @include margin-block-1em();
     font-size: 2em;
   }
 
@@ -335,13 +365,11 @@ button {
   }
 
   .tags {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+    @include margin-block-1em();
   }
 
   .similar-title {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+    @include margin-block-1em();
     font-size: 2.5em;
   }
 
