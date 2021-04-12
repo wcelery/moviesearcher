@@ -8,7 +8,7 @@ Usage:
 ### 4. `npm i`
 ### 5. `npm start`
 
-### Or just use [demo](moviesearcher.wcelery.vercel.app/)
+### Or just use [demo](https://moviesearcher.wcelery.vercel.app/)
 
 Made with:
 + React
