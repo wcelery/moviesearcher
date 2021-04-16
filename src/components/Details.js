@@ -5,9 +5,20 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../redux/reducers/actions/favoritesActions";
+import { useParallax } from "../assets/useParallax";
+import { motion } from "framer-motion";
 
 export default function Details() {
   const dispatch = useDispatch();
+
+  const {
+    primaryX,
+    primaryY,
+    secondaryX,
+    secondaryY,
+    onMouseMoveHandler,
+    onMouseLeaveHandler,
+  } = useParallax();
 
   const details = useSelector((state) => state.movies.fetchedDetails);
   const genres = useSelector((state) => state.movies.fetchedGenres);
@@ -22,9 +33,9 @@ export default function Details() {
       id: id,
     };
   };
-  let movie = parse(details.poster_path, details.title, details.id);
+  const movie = parse(details.poster_path, details.title, details.id);
 
-  let isFavorite = movie.id in favorites;
+  const isFavorite = movie.id in favorites;
 
   const isStored = (value) => {
     if (value) {
@@ -36,13 +47,33 @@ export default function Details() {
 
   return (
     <div className="details">
-      <img
-        src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
-        alt=""
-        width="342px"
-      />
+      <motion.div
+        onMouseMove={onMouseMoveHandler}
+        onMouseLeave={onMouseLeaveHandler}
+        className="parallax"
+      >
+        <motion.img
+          style={{
+            x: secondaryX,
+            y: secondaryY,
+          }}
+          src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
+          alt=""
+          width="342px"
+          className="poster"
+        />
+        <motion.h1
+          style={{
+            x: primaryX,
+            y: primaryY,
+          }}
+          className="movie-title"
+        >
+          {details.title}
+        </motion.h1>
+      </motion.div>
+
       <div className="text">
-        <h1 className="movie-title">{details.title}</h1>
         <p className="description">{details.overview}</p>
         <section className="info">
           <table>
