@@ -17,7 +17,7 @@ Made with:
 + Few small libraries to make things easier
 + Love
 
-### Disclaimer
+### Known issues
 Actions should be:
 ```javascript
 export const action = (arg1, arg2) => {
@@ -37,3 +37,5 @@ export const action = (arg1, arg2) => {
 }
 ```
 Too lazy to refactor
+
+..and many more
