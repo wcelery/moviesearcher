@@ -18,7 +18,7 @@ Made with:
 + Love
 
 ### Known issues
-Actions should be:
++ Actions should be:
 ```javascript
 export const action = (arg1, arg2) => {
   type: SOME_TYPE,
@@ -36,6 +36,6 @@ export const action = (arg1, arg2) => {
   arg2 
 }
 ```
-Too lazy to refactor
++ Should separate redux state from UI views
 
-..and many more
+Too lazy to refactor
