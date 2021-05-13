@@ -17,7 +17,7 @@ Made with:
 + Few small libraries to make things easier
 + Love
 
-### Known issues
+### TODO
 + Actions should be:
 ```javascript
 export const action = (arg1, arg2) => {
@@ -37,5 +37,6 @@ export const action = (arg1, arg2) => {
 }
 ```
 + Should separate redux state from UI views
++ Move assets to `/public/static `
 
 Too lazy to refactor
