@@ -23,14 +23,11 @@ export default function Details() {
   const genres = useSelector((state) => state.movies.fetchedGenres);
   const favorites = useSelector((state) => state.favoriteStore.favorites);
 
-  const parse = (poster, title, id) => {
-    return {
-      poster: poster,
-      title: title,
-      id: id,
-    };
+  const movie = {
+    poster: details.poster_path,
+    title: details.title,
+    id: details.id,
   };
-  const movie = parse(details.poster_path, details.title, details.id);
 
   const isFavorite = movie.id in favorites;
 
