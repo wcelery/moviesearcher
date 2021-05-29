@@ -14,16 +14,9 @@ export default function Movie({ poster, title, id }) {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favoriteStore.favorites);
 
-  const parse = (poster, title, id) => {
-    return {
-      poster: poster,
-      title: title,
-      id: id,
-    };
-  };
-  let movie = parse(poster, title, id);
+  const movie = { poster, title, id };
 
-  let isFavorite = movie.id in favorites;
+  const isFavorite = movie.id in favorites;
 
   const isStored = (value) => {
     if (value) {
