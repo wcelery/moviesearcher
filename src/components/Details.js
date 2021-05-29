@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
@@ -23,8 +22,6 @@ export default function Details() {
   const details = useSelector((state) => state.movies.fetchedDetails);
   const genres = useSelector((state) => state.movies.fetchedGenres);
   const favorites = useSelector((state) => state.favoriteStore.favorites);
-
-  const genreNames = genres.map((genre) => genre.name);
 
   const parse = (poster, title, id) => {
     return {
@@ -100,9 +97,9 @@ export default function Details() {
           </table>
         </section>
         <section className="tags">
-          {genreNames.map((genre) => (
-            <button key={uuidv4()} className="genre">
-              {genre}
+          {genres.map((genre) => (
+            <button key={genre.id} className="genre">
+              {genre.name}
             </button>
           ))}
         </section>

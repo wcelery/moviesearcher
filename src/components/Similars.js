@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useSelector } from "react-redux";
 import Movie from "./Movie";
 
@@ -11,7 +10,7 @@ export default function Similars() {
       <div className="similar">
         {similars.map((similar) => (
           <Movie
-            key={uuidv4()}
+            key={similar.id}
             poster={similar.poster_path}
             title={similar.title}
             id={similar.id}
