@@ -6,6 +6,7 @@ import Nav from "./components/containers/Nav";
 import Home from "./components/containers/Home";
 import MovieDetails from "./components/containers/MovieDetails";
 import Favorites from "./components/Favorites";
+import AlertMessage from "./assets/components/AlertMessage";
 
 function App() {
   return (
@@ -19,6 +20,12 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route path="/movie:id" component={MovieDetails} />
                 <Route exact path="/favorites" component={Favorites} />
+                <Route path="*">
+                  <AlertMessage
+                    primaryText="Hey buddy, I think you've got the wrong door"
+                    secondaryText="The leather club is three blocks down"
+                  />
+                </Route>
               </Switch>
             </AnimatePresence>
           )}
