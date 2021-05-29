@@ -17,8 +17,8 @@ Made with:
 + Few small libraries to make things easier
 + Love
 
-### Disclaimer
-Actions should be:
+### TODO
++ Actions should be:
 ```javascript
 export const action = (arg1, arg2) => {
   type: SOME_TYPE,
@@ -36,4 +36,7 @@ export const action = (arg1, arg2) => {
   arg2 
 }
 ```
++ Should separate redux state from UI views
++ Move assets to `/public/static `
+
 Too lazy to refactor
