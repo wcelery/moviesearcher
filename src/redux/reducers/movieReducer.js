@@ -1,10 +1,4 @@
-import {
-  CLEAR_BEST_MOVIES,
-  FETCH_GENRES,
-  FETCH_MOVIES,
-  FETCH_MOVIE_DETAILS,
-  FETCH_SIMILARS,
-} from "../config";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fetchedMovies: [],
@@ -14,7 +8,21 @@ const initialState = {
   page: 1,
 };
 
-export const movieReducer = (state = initialState, action) => {
+const movieSlice = createSlice({
+  name: "movie",
+  initialState,
+  reducers: {
+    clearBestMovies(state, action) {
+      state.fetchedMovies = [];
+      state.page = 1;
+    },
+  },
+});
+
+export const { clearBestMovies } = movieSlice.actions;
+export default movieSlice.reducer;
+
+/* export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MOVIES:
       return {
@@ -46,4 +54,4 @@ export const movieReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}; */

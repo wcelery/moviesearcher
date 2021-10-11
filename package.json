@@ -19,7 +19,6 @@
     "react-scripts": "^4.0.3",
     "react-tooltip": "^4.2.11",
     "react-useanimations": "^2.0.5",
-    "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },
   "scripts": {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { appReducer } from "./appReducer";
-import { movieReducer } from "./movieReducer";
+import movieReducer from "./movieReducer";
 import { searchReducer } from "./searchReducer";
 import { favoritesReducer } from "./favoritesReducer";
 
