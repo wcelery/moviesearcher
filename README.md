@@ -16,27 +16,3 @@ Made with:
 + Framer Motion
 + Few small libraries to make things easier
 + Love
-
-### TODO
-+ Actions should be:
-```javascript
-export const action = (arg1, arg2) => {
-  type: SOME_TYPE,
-  payload: {
-    arg1,
-    arg2 
-    }
-}
-```
-instead of:
-```javascript
-export const action = (arg1, arg2) => {
-  type: SOME_TYPE,
-  arg1,
-  arg2 
-}
-```
-+ Should separate redux state from UI views
-+ Move assets to `/public/static `
-
-Too lazy to refactor
