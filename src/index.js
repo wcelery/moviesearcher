@@ -9,16 +9,16 @@ import App from "./App";
 import { rootReducer } from "./redux/reducers/rootReducer";
 import { sagaWatcher } from "./redux/sagas";
 
-const saga = createSagaMiddleware();
+/* const saga = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(saga)));
 
-saga.run(sagaWatcher);
+saga.run(sagaWatcher); */
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={rootReducer}>
         <App />
       </Provider>
     </BrowserRouter>
