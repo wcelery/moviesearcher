@@ -23,7 +23,7 @@ export default function ContentContainer({ children, movies }) {
     );
   }
 
-  if (!totalPages) {
+  if (!movies.total_pages) {
     return (
       <AlertMessage
         primaryText="Not Found"

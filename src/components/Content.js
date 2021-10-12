@@ -5,10 +5,11 @@ import Movie from "./Movie";
 import ContentContainer from "./containers/ContentContainer";
 import { Loader } from "../assets/components/Loader";
 import { requestMovies, requestSearch } from "../redux/actions";
+import { useGetPopularMoviesQuery } from "../api/movieApi";
 
 export default function Content() {
-  let movies;
-  let page;
+  /* let movies;
+  let page; */
 
   //pulling things from store like that:
   const bestMovies = useSelector((state) => state.movies.fetchedMovies);
@@ -19,32 +20,35 @@ export default function Content() {
   const loading = useSelector((state) => state.app.loading);
   const totalPages = useSelector((state) => state.app.totalPages);
 
+  const [page, setPage] = React.useState(1);
+  const { data, error, isLoading } = useGetPopularMoviesQuery(page);
+  const [movies, setMovies] = React.useState([]);
+
   const dispatch = useDispatch();
 
-  if (query) {
+  React.useEffect(() => {
+    setMovies([...movies, data?.results].filter((movie) => movie !== undefined).flat(1));
+  }, [data?.results]);
+
+  /* if (query) {
     movies = searchedMovies;
     page = searchPage;
   } else {
     movies = bestMovies;
     page = bestPage;
-  }
+  } */
 
   const fetchMoreData = () => {
-    const isScrolling = true;
-    if (query) {
-      dispatch(requestSearch(query, isScrolling));
-    } else if (searchedMovies.length === 0) {
-      dispatch(requestMovies());
-    }
+    setPage((prev) => prev + 1);
   };
 
   return (
-    <ContentContainer movies={movies}>
+    <ContentContainer movies={data}>
       <InfiniteScroll
         pageStart={1}
         initialLoad={false}
         loadMore={() => fetchMoreData()}
-        hasMore={loading ? false : page <= totalPages}
+        hasMore={data?.page !== data?.total_pages}
         loader={<Loader key={-1} />}
       >
         <div className="content">
